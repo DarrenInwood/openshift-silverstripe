@@ -146,7 +146,18 @@
         "strategy": {
           "type": "Recreate",
           "recreateParams": {
-            "timeoutSeconds": 600
+            "timeoutSeconds": 600,
+            "post": {
+              "failurePolicy": "Abort",
+              "execNewPod": {
+                "containerName": "ss-mysql-persistent",
+                "command": [
+                  "sake",
+                  "dev/build",
+                  "flush=all"
+                ]
+              }
+            }
           },
           "resources": [
           ]
@@ -181,6 +192,14 @@
             }
           },
           "spec": {
+            "volumes": [
+              {
+                "name": "${NAME}-data",
+                "persistentVolumeClaim": {
+                  "claimName": "${NAME}"
+                }
+              }
+            ],
             "containers": [
               {
                 "name": "ss-mysql-persistent",
@@ -207,6 +226,10 @@
                   }
                 },
                 "env": [
+                  {
+                    "name": "APPLICATION_DOMAIN",
+                    "value": "${APPLICATION_DOMAIN}"
+                  },
                   {
                     "name": "DATABASE_SERVICE_NAME",
                     "value": "${DATABASE_SERVICE_NAME}"
@@ -246,9 +269,33 @@
                   "limits": {
                     "memory": "${MEMORY_LIMIT}"
                   }
-                }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "${NAME}-data",
+                    "mountPath": "/opt/app-root/src/assets"
+                  }
+                ],
+
               }
             ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "resources": {
+          "requests": {
+            "storage": "${SS_VOLUME_CAPACITY}"
           }
         }
       }
@@ -439,8 +486,15 @@
       "value": "512Mi"
     },
     {
+      "name": "SS_VOLUME_CAPACITY",
+      "displayName": "Volume Capacity (SilverStripe)",
+      "description": "Volume space available for data, e.g. 512Mi, 2Gi",
+      "value": "1Gi",
+      "required": true
+    },
+    {
       "name": "VOLUME_CAPACITY",
-      "displayName": "Volume Capacity",
+      "displayName": "Volume Capacity (MySQL)",
       "description": "Volume space available for data, e.g. 512Mi, 2Gi",
       "value": "1Gi",
       "required": true
