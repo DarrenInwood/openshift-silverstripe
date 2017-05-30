@@ -20,7 +20,5 @@ echo 'define("SS_DATABASE_SERVER", getenv("DATABASE_SERVICE_NAME"));' >> ${HOME}
 echo 'define("SS_DATABASE_USERNAME", getenv("DATABASE_USER"));' >> ${HOME}/_ss_environment.php
 echo 'define("SS_DATABASE_PASSWORD", getenv("DATABASE_PASSWORD"));' >> ${HOME}/_ss_environment.php
 echo 'define("SS_DATABASE_NAME", getenv("DATABASE_NAME"));' >> ${HOME}/_ss_environment.php
-
-echo "\n\n"
-cat ${HOME}/_ss_environment.php
-echo "\n\n"
+echo 'global $_FILE_TO_URL_MAPPING;' >> ${HOME}/_ss_environment.php
+echo "\$_FILE_TO_URL_MAPPING['$HOME'] = 'http://$APPLICATION_DOMAIN/';" >> ${HOME}/_ss_environment.php

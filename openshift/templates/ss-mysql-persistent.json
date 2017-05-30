@@ -130,10 +130,7 @@
               "secret": "${GITHUB_WEBHOOK_SECRET}"
             }
           }
-        ],
-        "postCommit": {
-          "script": "php framework/cli-script.php dev/build flush=all"
-        }
+        ]
       }
     },
     {
@@ -149,16 +146,10 @@
         "strategy": {
           "type": "Recreate",
           "recreateParams": {
-            "pre": {
-              "failurePolicy": "Retry",
-              "execNewPod": {
-                "command": [
-                  "php framework/cli-script.php dev/build flush=all"
-                ],
-                "containerName": "ss-mysql-persistent"
-              }
-            }
-          }
+            "timeoutSeconds": 600
+          },
+          "resources": [
+          ]
         },
         "triggers": [
           {
