@@ -21,3 +21,4 @@ echo 'define("SS_ENVIRONMENT_TYPE", "dev");' >> ${HOME}/_ss_environment.php
 echo 'define("SS_DATABASE_SERVER", getenv("DATABASE_SERVICE_NAME"));' >> ${HOME}/_ss_environment.php
 echo 'define("SS_DATABASE_USERNAME", getenv("DATABASE_USER"));' >> ${HOME}/_ss_environment.php
 echo 'define("SS_DATABASE_PASSWORD", getenv("DATABASE_PASSWORD"));' >> ${HOME}/_ss_environment.php
+echo 'define("SS_DATABASE_NAME", getenv("DATABASE_NAME"));' >> ${HOME}/_ss_environment.php
