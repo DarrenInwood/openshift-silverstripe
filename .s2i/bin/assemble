@@ -13,6 +13,8 @@ if [ -f ${HOME}/framework/sake ]; then
     chmod a+x ${HOME}/bin/sake
 fi
 
+export
+
 # Create database config
 echo '<?php' > ${HOME}/_ss_environment.php
 echo 'define("SS_ENVIRONMENT_TYPE", "dev");' >> ${HOME}/_ss_environment.php
