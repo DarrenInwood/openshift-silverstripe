@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+if [ -e /usr/local/sti/assemble ]; then
+  # old assemble location in previous php image versions
+  source /usr/local/sti/assemble
+else 
+  source ${STI_SCRIPTS_PATH}/assemble
+fi
+
+[[ -d ./app/tmp ]] && chmod -R go+rw ./app/tmp
+
+# Get access to `sake` shell command for generating DB schema and migrations
+if [ -f ${HOME}/framework/sake ]; then
+	ln -s ${HOME}/framework/sake ${HOME}/bin/sake
+    chmod a+x ${HOME}/bin/sake
+fi
