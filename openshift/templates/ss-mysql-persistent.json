@@ -459,7 +459,7 @@
       "displayName": "Git Repository URL",
       "description": "The URL of the repository with your application source code.",
       "required": true,
-      "value": "https://github.com/openshift/cakephp-ex.git"
+      "value": "https://github.com/DarrenInwood/openshift-silverstripe.git"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",
@@ -474,7 +474,7 @@
     {
       "name": "APPLICATION_DOMAIN",
       "displayName": "Application Hostname",
-      "description": "The exposed hostname that will route to the CakePHP service, if left blank a value will be defaulted.",
+      "description": "The exposed hostname that will route to the SilverStripe service, if left blank a value will be defaulted.",
       "value": ""
     },
     {
@@ -507,7 +507,7 @@
       "name": "DATABASE_USER",
       "displayName": "Database User",
       "required": true,
-      "value": "cakephp"
+      "value": "silverstripe"
     },
     {
       "name": "DATABASE_PASSWORD",
